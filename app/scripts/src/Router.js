@@ -1,7 +1,7 @@
-var BG = BG || {};
-BG.view = BG.view || {};
+var bg = bg || {};
+bg.view = bg.view || {};
 
-(function($, BG) {
+(function($, bg) {
     var Router = Backbone.Router.extend({
         routes: {
             "":                  "index",
@@ -15,7 +15,7 @@ BG.view = BG.view || {};
         },
 
         index: function() {
-            BG.view.appView.render();
+            bg.view.appView.render();
         },
 
         /**
@@ -24,8 +24,8 @@ BG.view = BG.view || {};
          * @param groupId {Integer}    Group id.
          */
         showGroup: function(groupId) {
-            var group = new BG.GroupModel({id: groupId});
-            var groupView = new BG.GroupView({model: group});
+            var group = new bg.GroupModel({id: groupId});
+            var groupView = new bg.GroupView({model: group});
             groupView.render();
         },
 
@@ -35,8 +35,8 @@ BG.view = BG.view || {};
          * @param userId {Integer}    User id.
          */
         showUser: function(userId) {
-            var user = new BG.UserModel({id: groupId});
-            var userView = new BG.UserView({model: user});
+            var user = new bg.UserModel({id: groupId});
+            var userView = new bg.UserView({model: user});
             userView.render();
         },
 
@@ -44,7 +44,7 @@ BG.view = BG.view || {};
          * Show user info page
          */
         showUser: function(id) {
-//            BG.UserView.render();
+//            bg.UserView.render();
         },
 
         /**
@@ -55,6 +55,6 @@ BG.view = BG.view || {};
         },
     });
 
-    BG.Router = Router;
+    bg.Router = Router;
 
-})(this.jQuery, BG);
+})(this.jQuery, bg);

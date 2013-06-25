@@ -1,9 +1,10 @@
-var BG = BG || {};
+var bg = bg || {};
+bg.collection = bg.collection || {};
 
-(function($, exports) {
+(function($, bg) {
     var GroupCollection = Backbone.Collection.extend({
         model: exports.GroupModel
     });
 
-    exports.GroupCollection = GroupCollection;
-})(this.jQuery, BG);
+    bg.collection.GroupCollection = GroupCollection;
+})(this.jQuery, bg);

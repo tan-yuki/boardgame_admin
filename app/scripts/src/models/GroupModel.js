@@ -1,6 +1,7 @@
-var BG = BG || {};
+var bg = bg || {};
+bg.model = bg.model || {};
 
-(function($, exports) {
+(function($, bg) {
     var GroupModel = Backbone.Model.extend({
         defaults: function() {
             return {
@@ -16,5 +17,5 @@ var BG = BG || {};
         }
     });
 
-    exports.GroupModel = GroupModel;
-})(this.jQuery, BG);
+    bg.model.GroupModel = GroupModel;
+})(this.jQuery, bg);

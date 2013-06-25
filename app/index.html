@@ -23,6 +23,9 @@
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
+        <!-- templates -->
+        <!-- /templates -->
+
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
@@ -31,7 +34,12 @@
             s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
 
+        <!-- template -->
+        <!-- /template -->
+
         <!-- build:js scripts/main.js -->
+        <script id="group-page/base" src="group-page/base.tmpl" type="text/template"></script>
+        <script id="group-page/group-list" src="group-page/group-list.tmpl" type="text/template"></script>
         <script src="bower_components/jquery/jquery.js"></script>
         <script src="bower_components/underscore/underscore.js"></script>
         <script src="bower_components/backbone/backbone.js"></script>
@@ -44,7 +52,7 @@
         <script src="scripts/src/views/AppView.js"></script>
         <script src="scripts/src/views/GroupView.js"></script>
         <script src="scripts/src/Router.js"></script>
-        <script src="scripts/main.js"></script>
+        <script src="scripts/bg.js"></script>
         <!-- endbuild -->
 
         <!-- build:js(.tmp) scripts/coffee.js -->

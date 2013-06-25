@@ -1,4 +1,5 @@
-var BG = BG || {};
+var bg = bg || {};
+bg.model = bg.model || {};
 
 (function($, exports) {
     var BoardGameModel = Backbone.Model.extend({
@@ -24,7 +25,7 @@ var BG = BG || {};
 
                 /**
                  * This boardgame owner
-                 * @type BG.UserModel
+                 * @type bg.model.UserModel
                  */
                 owner: null,
 
@@ -63,5 +64,5 @@ var BG = BG || {};
         }
     });
 
-    exports.BoardGameModel = BoardGameModel;
-})(this.jQuery, BG);
+    bg.model.BoardGameModel = BoardGameModel;
+})(this.jQuery, bg);

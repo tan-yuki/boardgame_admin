@@ -1,6 +1,7 @@
-var BG = BG || {};
+var bg = bg || {};
+bg.model = bg.model || {};
 
-(function($, exports) {
+(function($, bg) {
     var UserModel = Backbone.Model.extend({
         defaults: function() {
             return {
@@ -35,5 +36,5 @@ var BG = BG || {};
         }
     });
 
-    exports.UserModel = UserModel;
-})(this.jQuery, BG);
+    bg.model.UserModel = UserModel;
+})(this.jQuery, bg);

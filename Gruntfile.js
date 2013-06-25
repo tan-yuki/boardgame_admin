@@ -15,6 +15,7 @@ var mountFolder = function (connect, dir) {
 module.exports = function (grunt) {
     // load all grunt tasks
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+    var fs = require('fs');
 
     // configurable paths
     var yeomanConfig = {
@@ -366,4 +367,59 @@ module.exports = function (grunt) {
         'test',
         'build'
     ]);
+
+    grunt.registerTask('template', function(target) {
+        var options = {
+            dir: './app/scripts/templates',
+            appendTo: './app/index.html',
+            extention: 'tmpl',
+            idPrefix: 'tmpl',
+            idSeparator: '.',
+
+        };
+
+        var templateFiles = [];
+        var walk = function(dir) {
+            fs.readdir(dir, function(err, list) {
+                if (err) {
+                    throw err;
+                }
+                console.log(list);
+                for(var i = 0, n = list.length; i < n; i++) {
+                    var file = list[i];
+                    var absolutePath = dir + '/' + file;
+                    var stats = fs.lstatSync(absolutePath);
+                    if (stats.isFile()) {
+                        console.log('file');
+                        templateFiles.push(absolutePath);
+                    } else if (stats.isDirectory()) {
+                        console.log('dir');
+                        walk(absolutePath);
+                    } else {
+                        console.log('Unknonw type ' + absolutePath);
+                    }
+                };
+            })
+        };
+        walk(options.dir);
+        console.log(templateFiles);
+
+        var html = '';
+        for(var i = 0, n = templateFiles.length; i < n; i++) {
+            var tmpl = templateFiles[i];
+            if (options.extention && tmpl.indexOf(options.extention, tmpl.length - options.length) === -1) {
+                return false;
+            }
+            var relativePath = tmpl.substring(options.dir.length + 1);
+            var id = relativePath.replace(/\//g, options.idSeparator);
+            if (options.idPrefix) {
+                id = options.idPrefix + options.idSeparator;
+            }
+            html += '<script src="' + tmpl + ' id="' + id + '" type="text/template"></script>';
+            return true;
+        };
+
+        console.log(html);
+
+    });
 };

@@ -1,9 +1,10 @@
-var BG = BG || {};
+var bg = bg || {};
+bg.collection = bg.collection || {};
 
-(function($, exports) {
+(function($, bg) {
     var BoardGameCollection = Backbone.Collection.extend({
         model: exports.BoardGameModel
     });
 
-    exports.BoardGameCollection = BoardGameCollection;
-})(this.jQuery, BG);
+    bg.collection.BoardGameCollection = BoardGameCollection;
+})(this.jQuery, bg);

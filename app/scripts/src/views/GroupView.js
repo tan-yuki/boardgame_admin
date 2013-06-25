@@ -1,7 +1,8 @@
-var BG = BG || {};
+var bg = bg || {};
+bg.view = bg.view || {};
 
-(function($, BG) {
-    var GrouptView = Backbone.View.extend({
+(function($, bg) {
+    var GroupView = Backbone.View.extend({
         el: '#container',
         initialize: function() {
             this.listenTo(this.model, "change", this.render);
@@ -10,4 +11,5 @@ var BG = BG || {};
             return this;
         }
     });
-})(jQuery, BG);
+    bg.view.GroupView = GroupView;
+})(jQuery, bg);
