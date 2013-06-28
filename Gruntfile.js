@@ -56,6 +56,13 @@ module.exports = function (grunt) {
                     '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
                     '<%= yeoman.app %>/scripts/**/*.js',
                 ]
+            },
+            scripts: {
+                files: '<%= yeoman.app %>/scripts/src/**/*.js',
+                task: ['jshint'],
+                options: {
+                    interrupt: true
+                }
             }
         },
         connect: {
@@ -378,31 +385,26 @@ module.exports = function (grunt) {
 
         };
 
+        var async = require('async');
+
         var templateFiles = [];
         var walk = function(dir) {
-            fs.readdir(dir, function(err, list) {
-                if (err) {
-                    throw err;
+            var list = fs.readdirSync(dir);
+            for(var i = 0, n = list.length; i < n; i++) {
+                var file = list[i];
+                var absolutePath = dir + '/' + file;
+                var stats = fs.lstatSync(absolutePath);
+                if (stats.isFile()) {
+                    templateFiles.push(absolutePath);
+                } else if (stats.isDirectory()) {
+                    walk(absolutePath);
+                } else {
+                    console.log('Unknonw type ' + absolutePath);
                 }
-                console.log(list);
-                for(var i = 0, n = list.length; i < n; i++) {
-                    var file = list[i];
-                    var absolutePath = dir + '/' + file;
-                    var stats = fs.lstatSync(absolutePath);
-                    if (stats.isFile()) {
-                        console.log('file');
-                        templateFiles.push(absolutePath);
-                    } else if (stats.isDirectory()) {
-                        console.log('dir');
-                        walk(absolutePath);
-                    } else {
-                        console.log('Unknonw type ' + absolutePath);
-                    }
-                };
-            })
+            }
         };
+
         walk(options.dir);
-        console.log(templateFiles);
 
         var html = '';
         for(var i = 0, n = templateFiles.length; i < n; i++) {
@@ -413,13 +415,11 @@ module.exports = function (grunt) {
             var relativePath = tmpl.substring(options.dir.length + 1);
             var id = relativePath.replace(/\//g, options.idSeparator);
             if (options.idPrefix) {
-                id = options.idPrefix + options.idSeparator;
+                id = options.idPrefix + options.idSeparator + id;
             }
             html += '<script src="' + tmpl + ' id="' + id + '" type="text/template"></script>';
-            return true;
-        };
+        }
 
         console.log(html);
-
     });
 };
